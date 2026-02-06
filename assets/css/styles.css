@@ -458,6 +458,10 @@ li + li {
   margin-top: auto;
 }
 
+.privacy-link a {
+  color: var(--muted);
+}
+
 /* =========================
    Responsive
    ========================= */
