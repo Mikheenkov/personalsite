@@ -38,9 +38,9 @@
   --s-4: 16px;
   --s-5: 24px;
   --s-6: 32px;
-  --s-7: 48px;
-  --s-8: 72px;
-  --s-9: 96px;
+  --s-7: 34px;
+  --s-8: 50px;
+  --s-9: 67px;
 
   /* Radius */
   --r-1: 8px;
@@ -185,6 +185,7 @@ li + li {
   align-items: center;
   justify-content: space-between;
   gap: var(--s-4);
+  position: relative;
 }
 
 .brand {
@@ -226,6 +227,38 @@ li + li {
   margin: 0;
 }
 
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-1);
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--accent);
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.nav-toggle .burger {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.nav-toggle .burger-line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
 .nav-link {
   font-weight: var(--fw-medium);
   display: inline-block;
@@ -253,11 +286,22 @@ li + li {
   z-index: 2;
 }
 
+.hero-dash {
+  position: absolute;
+  top: 125px;
+  left: calc((100vw - var(--container)) / -2 - var(--gutter));
+  width: max(0px, calc((100vw - var(--container)) / 2 - 16px));
+  height: 9px;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .hero-home .hero-photo {
   position: relative;
   min-height: 620px;
   margin-left: -80px;
-  margin-bottom: -120px;
+  margin-bottom: -40px;
 }
 
 .hero-home .hero-photo::before {
@@ -308,16 +352,24 @@ li + li {
 
 .telegram-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 2fr) auto minmax(0, 1fr);
   align-items: center;
   gap: var(--s-5);
   padding: calc(var(--s-6) * 0.7);
+  background: #f5f9ff;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card-soft {
   background: #f5f9ff;
 }
 
 .telegram-icon {
   width: 70px;
   height: 70px;
+  justify-self: center;
 }
 
 .telegram-icon a {
@@ -334,18 +386,22 @@ li + li {
   display: block;
 }
 
-.telegram-info {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-2);
-  align-items: flex-end;
+.telegram-title {
+  text-align: left;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.telegram-link {
   text-align: right;
 }
 
-.telegram-right {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-4);
+.telegram-link-desktop {
+  display: inline;
+}
+
+.telegram-link-mobile {
+  display: none;
 }
 
 .pricing-card {
@@ -401,6 +457,12 @@ li + li {
   color: var(--accent);
 }
 
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+}
+
 .list-clean {
   list-style: none;
   padding: 0;
@@ -418,6 +480,15 @@ li + li {
 .divider {
   border-top: 1px solid var(--line);
   margin: var(--s-6) 0;
+}
+
+.divider-accent {
+  border-top: 1px solid var(--accent);
+  margin: 0;
+}
+
+.section-divider {
+  padding: var(--s-4) 0;
 }
 
 .mt-6 {
@@ -455,7 +526,7 @@ li + li {
 }
 
 .privacy-link {
-  margin-top: auto;
+  margin-top: var(--s-4);
 }
 
 .privacy-link a {
@@ -482,13 +553,65 @@ li + li {
   }
 
   .header-inner {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
   }
 
   .nav-list {
-    flex-wrap: wrap;
-    gap: var(--s-3) var(--s-5);
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s-3);
+    position: absolute;
+    right: 0;
+    top: calc(100% + var(--s-3));
+    margin: 0;
+    padding: var(--s-4);
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    z-index: 20;
+  }
+
+  .hero-home {
+    overflow: visible;
+  }
+
+  .hero-home .hero-grid {
+    position: relative;
+  }
+
+  .hero-home .hero-photo {
+    position: relative;
+    min-height: 420px;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+
+  .hero-home .hero-photo::before {
+    background-size: auto 100%;
+    background-position: center top;
+  }
+
+  .hero-home .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-dash {
+    top: 90px;
+    left: calc(var(--gutter) * -1);
+    width: calc(100vw - var(--gutter) * 2);
+    display: none;
+  }
+
+  body.nav-open .nav-list {
+    display: flex;
   }
 
   .hero-visual {
@@ -502,17 +625,31 @@ li + li {
   }
 
   .telegram-card {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+  }
+
+  .telegram-title {
+    display: none;
+  }
+
+  .telegram-link {
     text-align: left;
   }
 
-  .telegram-info {
-    align-items: flex-start;
-    text-align: left;
+  .telegram-link-desktop {
+    display: none;
   }
 
-  .telegram-right {
-    align-items: flex-start;
+  .telegram-link-mobile {
+    display: inline;
+  }
+
+  .telegram-link {
+    word-break: break-word;
   }
 
   .pricing-card {
@@ -524,6 +661,11 @@ li + li {
 @media (max-width: 640px) {
   .hero {
     padding: var(--s-8) 0 var(--s-6);
+  }
+
+  .button-row {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .hero-illustration {
